@@ -1,0 +1,56 @@
+#jumbo {
+  transform: translateY();
+  padding: 0;
+  position: relative;
+  background-color: white;
+  height: 562.5px;
+  border-radius: 10px;
+}
+
+#profile-img {
+  position: absolute;
+  left: 30px;
+  width: 160px;
+  height: 160px;
+  transform: translateY(65%);
+  /* background-image: url("../assets/user.svg"); */
+  border: 3px solid white;
+  border-radius: 90%;
+  /* margin-bottom: 2rem; */
+}
+
+#profile-img:hover {
+  cursor: pointer;
+}
+
+#background-img {
+  background-image: url('https://static-exp1.licdn.com/sc/h/9e0ckeb27mzi70ne80f4hv7il');
+  height: 33%;
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#info-wrapper {
+  transform: translateY(65%);
+}
+
+#dropdown-wrapper {
+  flex-direction: row;
+}
+
+#dropdown-open {
+  height: 32px;
+  background-color: rgb(10, 102, 194);
+  border-radius: 16px;
+  margin-right: 1rem;
+}
+#dropdown-add {
+  height: 32px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 16px;
+  color: #000;
+  margin-right: 1rem;
+}
