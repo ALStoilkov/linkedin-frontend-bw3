@@ -29,18 +29,20 @@ export default class MakePost extends Component {
 
   handleDelete = async (e) => {
     console.log("my delete value", e.target.value);
-    const headers = {
-      Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
-      "Content-Type": "application/json",
-    };
+    // const headers = {
+    //   Authorization: "Bearer " + ,
+    //   "Content-Type": "application/json",
+    // };
     try {
       const response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/posts/" + e.target.value,
-        {
-          method: "DELETE",
-          headers,
-        }
-      );
+				`${process.env.REACT_APP_BACKEND_CLOUD}/api/posts/` + e.target.value,
+				{
+					method: "DELETE",
+          headers: {
+            token:process.env.REACT_APP_TOKEN
+          }
+				}
+			);
       //   const post = await response.json();
       //   console.log(post);
       this.renderPosts();
@@ -66,7 +68,7 @@ export default class MakePost extends Component {
               ></img>
               <img
                 className="d-inline-block"
-                src={this.props.user.image}
+                src={this.props.user?.image}
                 style={{
                   borderRadius: "90px",
                   top: "20px",
@@ -79,9 +81,9 @@ export default class MakePost extends Component {
               />
               <Card.Body>
                 <Card.Title>
-                  {this.props.user.name} {this.props.user.surname}
+                  {this.props.user?.name} {this.props.user?.surname}
                 </Card.Title>
-                <Card.Text>{this.props.user.bio}</Card.Text>
+                <Card.Text>{this.props.user?.bio}</Card.Text>
               </Card.Body>
               <Card.Footer>
                 <small className="text-muted">Last updated 2 mins ago</small>
@@ -93,7 +95,7 @@ export default class MakePost extends Component {
             <Post />
             {this.state.posts &&
               this.state.posts.map((post) => (
-                <Card key={post._id} className="my-2 postCard">
+                <Card key={post?._id} className="my-2 postCard">
                   <Col xs={12} className="p-0 mb-4 section-outer">
                     <div
                       style={{ padding: "12px 12px 0px 12px" }}

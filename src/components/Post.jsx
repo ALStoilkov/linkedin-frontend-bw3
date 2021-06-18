@@ -17,7 +17,7 @@ class Post extends Component {
   componentDidMount = async () => {
     try {
       let response = await fetch(
-        `${process.env.REACT_APP_BACKEND_CLOUD}/api/profile/60cc6e6a6fa0470015f7ff1e`,
+        `${process.env.REACT_APP_BACKEND_CLOUD}/api/profile/${process.env.REACT_APP_ID}`,
         {
           headers: {
             token: process.env.REACT_APP_TOKEN,

@@ -1,15 +1,15 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import "../styles/nav.css";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class Nav extends Component {
-	state = {
-		search: "",
-	};
+  state = {
+    search: "",
+  };
 
-	render() {
-		// console.log(process.env.REACT_APP_TOKEN)
-		return (
+  render() {
+    // console.log(process.env.REACT_APP_TOKEN)
+    return (
 			<div className="navbar">
 				<div className="navleft mx-auto">
 					<Link to="/">
@@ -66,7 +66,7 @@ export default class Nav extends Component {
 								Home
 							</button>
 						</Link>
-						<Link to={`/${this.props.user?._id}`}>
+						<Link to={this.props.user?._id}>
 							<button className="navbtn">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ export default class Nav extends Component {
 							Notifications
 						</button>
 						<Link to={`/${this.props.user?._id}`}>
-							<button className="dropdown">
+							<button className="  dropdown">
 								<div className="mebtn">
 									<div className="usericon">
 										<img
@@ -135,8 +135,8 @@ export default class Nav extends Component {
 											alt="profile"
 										/>
 										<div className="dropdownuserinfo">
-											<h6>{this.props.user.username}</h6>
-											{this.props.user.bio}
+											<h6>{this.props.user?.username}</h6>
+											{this.props.user?.bio}
 										</div>
 										<br />
 										<button className="dropdownbtn" href="/me">
@@ -179,5 +179,5 @@ export default class Nav extends Component {
 				</div>
 			</div>
 		);
-	}
+  }
 }

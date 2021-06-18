@@ -27,18 +27,14 @@ class Experiences extends Component {
   handleDelete = async (e) => {
     console.log(e);
     const headers = {
-      Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
+      token :process.env.REACT_APP_TOKEN,
       "Content-Type": "application/json",
     };
     try {
-      await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/me/experiences/" +
-          e,
-        {
-          method: "DELETE",
-          headers,
-        }
-      );
+      await fetch(`${process.env.REACT_APP_BACKEND_CLOUD}/api/profile/toni/experiences`, {
+				method: "DELETE",
+				headers,
+			});
     } catch (error) {
       console.log("You have an error posting:", error);
     }
@@ -61,7 +57,7 @@ class Experiences extends Component {
           </Col>
         </Row>
         <br />
-        {this.state.experiences.map((experience) => (
+        {this.state.experiences?.length > 0 && this.state.experiences.map((experience) => (
           <Row>
             <Col md={1}></Col>
             <Col md={8}>

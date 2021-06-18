@@ -14,12 +14,16 @@ import MakePost from "./components/MakePost";
 import UserPage from "./components/UserPage";
 
 class App extends React.Component {
-  state = {
-    user: {},
-  };
+  constructor(props) {
+    super(props)
+      this.state = {
+				user: {},
+			};
+  }
+
 
   componentDidMount = async () => {
-    const getUser = await fetchUser("/60c8bba22b9ea41884395507");
+    const getUser = await fetchUser(process.env.REACT_APP_ID);
     console.log(getUser);
     this.setState({ user: getUser });
   };
