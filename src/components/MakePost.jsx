@@ -95,7 +95,7 @@ export default class MakePost extends Component {
             <DiscoverMore />
           </Col>
           <Col className="col-9">
-            <Post />
+            <Post userId={this.props.user._id} />
 
             {this.state.posts &&
               this.state.posts.reverse().map((post) => (

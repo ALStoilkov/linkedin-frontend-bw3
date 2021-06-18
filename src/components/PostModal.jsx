@@ -15,7 +15,7 @@ class PostModal extends Component {
   state = {
     post: {
       text: "",
-      user: "60cc6e6a6fa0470015f7ff1e",
+      user: this.props.userId,
     },
     isLoading: false,
     postCss1: "postbtn1 ",

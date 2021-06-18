@@ -13,6 +13,7 @@ class Post extends Component {
     imgUrl: "",
     name: "",
     surname: "",
+    userId: this.props.userId,
   };
   componentDidMount = async () => {
     try {
@@ -113,6 +114,7 @@ class Post extends Component {
           </div>
         </div>
         <PostModal
+          userId={this.state.userId}
           show={this.state.clicked}
           hide={() => this.setState({ clicked: false })}
           img={this.state.imgUrl}
