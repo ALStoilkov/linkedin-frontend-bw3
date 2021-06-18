@@ -3,7 +3,9 @@ import { Button, Card, Container, Col, Row } from "react-bootstrap";
 import { getPosts } from "../services/getPosts";
 import DiscoverMore from "./DiscoverMore";
 import Post from "./Post";
+import Comments from "./Comments";
 import "../styles/makeposts.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class MakePost extends Component {
   state = {
@@ -11,6 +13,9 @@ export default class MakePost extends Component {
     posts: [],
     posted: 0,
     isDeleteClicked: false,
+    isCommentClicked: false,
+    commentId: "",
+    userId: this.props.user._id,
   };
 
   componentDidMount = async () => {
@@ -18,19 +23,20 @@ export default class MakePost extends Component {
   };
 
   // componentDidUpdate = (pervProps, prevState) => {
-  //   this.renderPosts();
+  //   if (pervProps !== prevState) {
+  //     this.renderPosts();
+  //   }
   // };
 
   renderPosts = async () => {
     const posts = await getPosts();
     this.setState({ posts });
-    this.setState({ isSubmitClicked: false });
   };
 
   handleDelete = async (e) => {
     console.log("my delete value", e.target.value);
     const headers = {
-      Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
+      token: process.env.REACT_APP_TOKEN,
       "Content-Type": "application/json",
     };
     try {
@@ -41,8 +47,7 @@ export default class MakePost extends Component {
           headers,
         }
       );
-      //   const post = await response.json();
-      //   console.log(post);
+
       this.renderPosts();
     } catch (error) {
       console.log("You have an error deleting:", error);
@@ -91,6 +96,7 @@ export default class MakePost extends Component {
           </Col>
           <Col className="col-9">
             <Post />
+
             {this.state.posts &&
               this.state.posts.reverse().map((post) => (
                 <Card key={post._id} className="my-2 postCard">
@@ -129,21 +135,40 @@ export default class MakePost extends Component {
 
                     <div
                       style={{
-                        display: "inline-block",
-                        padding: "12px 12px 0px 12px",
+                        display: "flex",
+                        flexWrap: "wrap",
+                        flexDirection: "column",
                       }}
                     >
-                      {post.text}
+                      <div
+                        style={{
+                          padding: "12px 12px 0px 12px",
+                        }}
+                      >
+                        <em>{post.text}</em>
+                      </div>
+                      {post.image !== "no image uploaded yet :/" && (
+                        <img
+                          className="img-fluid mx-auto"
+                          style={{ height: "250px", width: "250px" }}
+                          src={post.image}
+                          alt={post.image}
+                        ></img>
+                      )}
                     </div>
-
-                    <div style={{ objectFit: "contain" }}></div>
+                    {this.state.isCommentClicked && (
+                      <Comments userId={this.state.userId} data={post} />
+                    )}
 
                     <div style={{ padding: "12px 12px 0px 12px" }}>
                       <img
                         src="https://static-exp1.licdn.com/sc/h/d310t2g24pvdy4pt1jkedo4yb"
                         alt="LIKE"
                       ></img>
-                      <span className="text-muted"> 0 · 0 comments </span>
+                      <span className="text-muted">
+                        {" "}
+                        {post.likes.length} · {post.comments.length} comments{" "}
+                      </span>
                     </div>
 
                     <div style={{ padding: "0px 12px 0px 12px" }}>
@@ -172,7 +197,15 @@ export default class MakePost extends Component {
                       </div>
 
                       <div className="d-flex align-items-center">
-                        <Button variant="light" className="mx-2 text-muted">
+                        <Button
+                          variant="light"
+                          className="mx-2 text-muted"
+                          onClick={() =>
+                            this.state.isCommentClicked
+                              ? this.setState({ isCommentClicked: false })
+                              : this.setState({ isCommentClicked: true })
+                          }
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
