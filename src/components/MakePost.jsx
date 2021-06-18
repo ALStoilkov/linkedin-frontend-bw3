@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Card, Container, Col, Row } from "react-bootstrap";
 import { getPosts } from "../services/getPosts";
+import DiscoverMore from "./DiscoverMore";
 import Post from "./Post";
 import "../styles/makeposts.css";
 
@@ -57,9 +58,39 @@ export default class MakePost extends Component {
     return (
       <Container>
         <Row>
+          <Col className="col-3">
+            <Card>
+              <img
+                alt=""
+                src="https://static-exp1.licdn.com/sc/h/9e0ckeb27mzi70ne80f4hv7il"
+              ></img>
+              <img
+                className="d-inline-block"
+                src={this.props.user.image}
+                style={{
+                  borderRadius: "90px",
+                  top: "20px",
+                  left: "10px",
+                  position: "absolute",
+                  border: "1px solid lightgrey",
+                }}
+                width="35px"
+                alt="profile"
+              />
+              <Card.Body>
+                <Card.Title>
+                  {this.props.user.name} {this.props.user.surname}
+                </Card.Title>
+                <Card.Text>{this.props.user.bio}</Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                <small className="text-muted">Last updated 2 mins ago</small>
+              </Card.Footer>
+            </Card>
+            <DiscoverMore />
+          </Col>
           <Col className="col-9">
             <Post />
-
             {this.state.posts &&
               this.state.posts.map((post) => (
                 <Card key={post._id} className="my-2 postCard">

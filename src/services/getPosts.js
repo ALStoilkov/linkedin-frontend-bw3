@@ -4,7 +4,7 @@ export const getPosts = async () => {
   };
   try {
     const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_LOCAL}/api/posts`,
+      `${process.env.REACT_APP_BACKEND_CLOUD}/api/posts`,
       {
         headers,
       }
