@@ -5,7 +5,7 @@ const getUsers = async () => {
 
   try {
     const response = await fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/",
+      `${process.env.REACT_APP_BACKEND_CLOUD}/api/profile/`,
       {
         headers,
       }

@@ -20,7 +20,7 @@ const fetchUser = async (userId) => {
     return user;
   } catch (error) {
     alert("You have an error in fetching another user:", error.message);
-    console.log(error)
+    console.log(error);
   }
 };
 
