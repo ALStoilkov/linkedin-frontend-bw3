@@ -1,15 +1,8 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Card,
-  Container,
-  Col,
-  Form,
-  FormControl,
-  Row,
-} from "react-bootstrap";
+import { Button, Card, Container, Col, Row } from "react-bootstrap";
 import { getPosts } from "../services/getPosts";
-import DiscoverMore from "../components/DiscoverMore";
+import DiscoverMore from "./DiscoverMore";
+import Post from "./Post";
 import "../styles/makeposts.css";
 
 export default class MakePost extends Component {
@@ -17,7 +10,6 @@ export default class MakePost extends Component {
     postInput: "",
     posts: [],
     posted: 0,
-    isSubmitClicked: false,
     isDeleteClicked: false,
   };
 
@@ -25,47 +17,16 @@ export default class MakePost extends Component {
     await this.renderPosts();
   };
 
-  componentDidUpdate = (pervProps, prevState) => {
-    {
-      this.state.isSubmitClicked && this.renderPosts();
-    }
-  };
+  // componentDidUpdate = (pervProps, prevState) => {
+  //   this.renderPosts();
+  // };
 
   renderPosts = async () => {
     const posts = await getPosts();
-    // console.log("MY POST", posts[0]);
     this.setState({ posts });
-    console.log("my postsssss", this.state.posts);
     this.setState({ isSubmitClicked: false });
   };
 
-  handleSubmit = async () => {
-    {
-      this.state.postInput.length > 0 &&
-        this.setState({ isSubmitClicked: true });
-      const postInput = { text: this.state.postInput };
-      const headers = {
-        Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
-        "Content-Type": "application/json",
-      };
-      try {
-        const response = await fetch(
-          "https://striveschool-api.herokuapp.com/api/posts/",
-          {
-            method: "POST",
-            body: JSON.stringify(postInput),
-            headers,
-          }
-        );
-        // const post = await response.json();
-        // console.log(post);
-        this.setState({ postInput: "" });
-      } catch (error) {
-        console.log("You have an error posting:", error);
-      }
-      // this.componentDidMount();
-    }
-  };
   handleDelete = async (e) => {
     console.log("my delete value", e.target.value);
     const headers = {
@@ -129,132 +90,8 @@ export default class MakePost extends Component {
             <DiscoverMore />
           </Col>
           <Col className="col-9">
-            <Card>
-              <Card.Body>
-                <Card.Text>
-                  <Row>
-                    <Col className="col-1">
-                      <img
-                        className="d-inline-block"
-                        src={this.props.user.image}
-                        style={{
-                          borderRadius: "90px",
-                          marginRight: "5px",
-                        }}
-                        width="50px"
-                        alt="profile"
-                      />
-                    </Col>
-                    <Col className="col-9">
-                      <div
-                        className="d-inline-block px-3 pb-3 align-items-center"
-                        style={{
-                          width: "100%",
-                        }}
-                      >
-                        <Form
-                          style={{
-                            width: "100%",
-                          }}
-                        >
-                          <FormControl
-                            style={{
-                              height: "48px",
-                              width: "100%",
-                              borderRadius: "35px",
-                            }}
-                            type="text"
-                            value={this.state.postInput}
-                            placeholder="Start a post"
-                            className="w-100 mr-sm-2"
-                            onChange={this.newPostValue}
-                          />
-                        </Form>
-                      </div>
-                    </Col>
-                  </Row>
-                </Card.Text>
-                <div
-                  style={{
-                    width: "80%",
-                    display: "flex",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <Button
-                    className="mx-2 bg-white btn-outline"
-                    variant="light"
-                    onClick={this.handleSubmit}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#e7a33e"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon>
-                      <line x1="3" y1="22" x2="21" y2="22"></line>
-                    </svg>
-                    Post
-                  </Button>
-                  <Button className="mx-2 bg-white" variant="light">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#70b5f9"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <rect x="3" y="3" width="18" height="18" rx="2" />
-                      <circle cx="8.5" cy="8.5" r="1.5" />
-                      <path d="M20.4 14.5L16 10 4 20" />
-                    </svg>
-                    Photo
-                  </Button>
-                  <Button className="mx-2 bg-white" variant="light">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#7fc15e"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <rect
-                        x="2"
-                        y="2"
-                        width="20"
-                        height="20"
-                        rx="2.18"
-                        ry="2.18"
-                      ></rect>
-                      <line x1="7" y1="2" x2="7" y2="22"></line>
-                      <line x1="17" y1="2" x2="17" y2="22"></line>
-                      <line x1="2" y1="12" x2="22" y2="12"></line>
-                      <line x1="2" y1="7" x2="7" y2="7"></line>
-                      <line x1="2" y1="17" x2="7" y2="17"></line>
-                      <line x1="17" y1="17" x2="22" y2="17"></line>
-                      <line x1="17" y1="7" x2="22" y2="7"></line>
-                    </svg>
-                    Video
-                  </Button>
-                </div>
-              </Card.Body>
-            </Card>
-            <br />
-            {this.state.posts?.length > 0 &&
+            <Post />
+            {this.state.posts &&
               this.state.posts.map((post) => (
                 <Card key={post._id} className="my-2 postCard">
                   <Col xs={12} className="p-0 mb-4 section-outer">

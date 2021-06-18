@@ -19,7 +19,7 @@ class App extends React.Component {
   };
 
   componentDidMount = async () => {
-    const getUser = await fetchUser("/60c9e0c35ee05a04b09ad152");
+    const getUser = await fetchUser("60cc6e6a6fa0470015f7ff1e");
     console.log(getUser);
     this.setState({ user: getUser });
   };
