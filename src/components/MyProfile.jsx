@@ -10,10 +10,16 @@ class MyProfile extends Component {
   state = {
     user: {},
     listOfUsers: [],
+    addExp: false,
+  };
+
+  addExp = async () => {
+    await fetchUser(`${this.props.user._id}`);
+    this.setState({ addExp: !this.state.addExp });
   };
 
   componentDidMount = async () => {
-    const getUser = await fetchUser(this.props.location.pathname);
+    const getUser = await fetchUser(`${this.props.user._id}`);
     this.setState({ user: getUser });
     const getListOfUsers = await getUsers();
     this.setState({ listOfUsers: getListOfUsers });

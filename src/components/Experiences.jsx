@@ -1,7 +1,7 @@
 import { Component } from "react";
 import "../styles/experiences.css";
 import { Button, Card, Col, Row } from "react-bootstrap";
-import getExp from "../services/getExp";
+import fetchUser from "../services/fetchUser.js";
 import ExperienceModal from "./ExperienceModal";
 
 class Experiences extends Component {
@@ -13,7 +13,10 @@ class Experiences extends Component {
     experiences: this.props.user.experiences,
   };
 
-  componentDidMount = async () => {};
+  componentDidMount = async () => {
+    console.log("MY EXP IN PROFILE", this.state.experiences);
+    console.log("MY PROFILE IN PROFILE PAGE", this.props.user);
+  };
 
   componentDidUpdate = async (prevProps) => {
     console.log("My user ID in update:", this.props.userID);
@@ -24,21 +27,25 @@ class Experiences extends Component {
     // }
   };
 
-  handleDelete = async (e) => {
-    console.log(e);
+  handleDelete = async (expId) => {
+    // console.log(e);
     const headers = {
-      token :process.env.REACT_APP_TOKEN,
+      token: process.env.REACT_APP_TOKEN,
       "Content-Type": "application/json",
     };
     try {
-      await fetch(`${process.env.REACT_APP_BACKEND_CLOUD}/api/profile/toni/experiences`, {
-				method: "DELETE",
-				headers,
-			});
+      await fetch(
+        `${process.env.REACT_APP_BACKEND_CLOUD}/api/profile/${this.props.user.username}/experiences/` +
+          expId,
+        {
+          method: "DELETE",
+          headers,
+        }
+      );
     } catch (error) {
       console.log("You have an error posting:", error);
     }
-    this.render();
+    fetchUser(`${this.props.user._id}`);
   };
 
   render() {
