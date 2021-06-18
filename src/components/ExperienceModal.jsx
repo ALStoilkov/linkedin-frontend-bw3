@@ -2,7 +2,7 @@ import { Button, Modal } from "react-bootstrap";
 import React, { useState } from "react";
 import Forms from "./Forms";
 
-export default function ExperienceModal() {
+export default function ExperienceModal(props) {
   const [lgShow, setLgShow] = useState(false);
 
   return (
@@ -43,7 +43,7 @@ export default function ExperienceModal() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Forms />
+          <Forms addExp={() => props.addExp()} isVis={() => setLgShow(false)} />
         </Modal.Body>
       </Modal>
     </>
