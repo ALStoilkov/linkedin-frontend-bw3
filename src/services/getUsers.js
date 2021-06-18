@@ -1,6 +1,6 @@
 const getUsers = async () => {
   const headers = {
-    Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
+    token: process.env.REACT_APP_TOKEN,
   };
 
   try {

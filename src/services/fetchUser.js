@@ -7,18 +7,20 @@ const fetchUser = async (userId) => {
 
   try {
     const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_CLOUD}/api/profile` + userId,
+      `${process.env.REACT_APP_BACKEND_CLOUD}/api/profile/` + userId,
+
       {
         headers,
       }
     );
 
-    // console.log(response);
+    console.log(response);
     const user = await response.json();
     // console.log(user);
     return user;
   } catch (error) {
-    alert("You have an error in fetching another user:", error);
+    alert("You have an error in fetching another user:", error.message);
+    console.log(error)
   }
 };
 
