@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Button,
   Card,
@@ -7,14 +7,14 @@ import {
   Form,
   FormControl,
   Row,
-} from 'react-bootstrap';
-import { getPosts } from '../services/getPosts';
-import DiscoverMore from '../components/DiscoverMore';
-import '../styles/makeposts.css';
+} from "react-bootstrap";
+import { getPosts } from "../services/getPosts";
+import DiscoverMore from "../components/DiscoverMore";
+import "../styles/makeposts.css";
 
 export default class MakePost extends Component {
   state = {
-    postInput: '',
+    postInput: "",
     posts: [],
     posted: 0,
     isSubmitClicked: false,
@@ -33,8 +33,9 @@ export default class MakePost extends Component {
 
   renderPosts = async () => {
     const posts = await getPosts();
+    console.log("MY POST", posts[0]);
     this.setState({ posts });
-    console.log('my postsssss', this.state.posts);
+    console.log("my postsssss", this.state.posts);
     this.setState({ isSubmitClicked: false });
   };
 
@@ -44,38 +45,38 @@ export default class MakePost extends Component {
         this.setState({ isSubmitClicked: true });
       const postInput = { text: this.state.postInput };
       const headers = {
-        Authorization: 'Bearer ' + process.env.REACT_APP_TOKEN,
-        'Content-Type': 'application/json',
+        Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
+        "Content-Type": "application/json",
       };
       try {
         const response = await fetch(
-          'https://striveschool-api.herokuapp.com/api/posts/',
+          "https://striveschool-api.herokuapp.com/api/posts/",
           {
-            method: 'POST',
+            method: "POST",
             body: JSON.stringify(postInput),
             headers,
           }
         );
         // const post = await response.json();
         // console.log(post);
-        this.setState({ postInput: '' });
+        this.setState({ postInput: "" });
       } catch (error) {
-        console.log('You have an error posting:', error);
+        console.log("You have an error posting:", error);
       }
       // this.componentDidMount();
     }
   };
   handleDelete = async (e) => {
-    console.log('my delete value', e.target.value);
+    console.log("my delete value", e.target.value);
     const headers = {
-      Authorization: 'Bearer ' + process.env.REACT_APP_TOKEN,
-      'Content-Type': 'application/json',
+      Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
+      "Content-Type": "application/json",
     };
     try {
       const response = await fetch(
-        'https://striveschool-api.herokuapp.com/api/posts/' + e.target.value,
+        "https://striveschool-api.herokuapp.com/api/posts/" + e.target.value,
         {
-          method: 'DELETE',
+          method: "DELETE",
           headers,
         }
       );
@@ -83,7 +84,7 @@ export default class MakePost extends Component {
       //   console.log(post);
       this.renderPosts();
     } catch (error) {
-      console.log('You have an error deleting:', error);
+      console.log("You have an error deleting:", error);
     }
     // this.componentDidMount();
   };
@@ -106,11 +107,11 @@ export default class MakePost extends Component {
                 className="d-inline-block"
                 src={this.props.user.image}
                 style={{
-                  borderRadius: '90px',
-                  top: '20px',
-                  left: '10px',
-                  position: 'absolute',
-                  border: '1px solid lightgrey',
+                  borderRadius: "90px",
+                  top: "20px",
+                  left: "10px",
+                  position: "absolute",
+                  border: "1px solid lightgrey",
                 }}
                 width="35px"
                 alt="profile"
@@ -137,8 +138,8 @@ export default class MakePost extends Component {
                         className="d-inline-block"
                         src={this.props.user.image}
                         style={{
-                          borderRadius: '90px',
-                          marginRight: '5px',
+                          borderRadius: "90px",
+                          marginRight: "5px",
                         }}
                         width="50px"
                         alt="profile"
@@ -148,19 +149,19 @@ export default class MakePost extends Component {
                       <div
                         className="d-inline-block px-3 pb-3 align-items-center"
                         style={{
-                          width: '100%',
+                          width: "100%",
                         }}
                       >
                         <Form
                           style={{
-                            width: '100%',
+                            width: "100%",
                           }}
                         >
                           <FormControl
                             style={{
-                              height: '48px',
-                              width: '100%',
-                              borderRadius: '35px',
+                              height: "48px",
+                              width: "100%",
+                              borderRadius: "35px",
                             }}
                             type="text"
                             value={this.state.postInput}
@@ -175,9 +176,9 @@ export default class MakePost extends Component {
                 </Card.Text>
                 <div
                   style={{
-                    width: '80%',
-                    display: 'flex',
-                    justifyContent: 'space-evenly',
+                    width: "80%",
+                    display: "flex",
+                    justifyContent: "space-evenly",
                   }}
                 >
                   <Button
@@ -253,18 +254,16 @@ export default class MakePost extends Component {
               </Card.Body>
             </Card>
             <br />
-            {this.state.posts
-              .slice(-4)
-              .reverse()
-              .map((post) => (
+            {this.state.posts.length > 0 &&
+              this.state.posts.map((post) => (
                 <Card key={post._id} className="my-2 postCard">
                   <Col xs={12} className="p-0 mb-4 section-outer">
                     <div
-                      style={{ padding: '12px 12px 0px 12px' }}
+                      style={{ padding: "12px 12px 0px 12px" }}
                       className="d-flex"
                     >
                       <img
-                        style={{ width: '48px', height: '48px' }}
+                        style={{ width: "48px", height: "48px" }}
                         src={post.user.image}
                         alt=""
                       ></img>
@@ -293,16 +292,16 @@ export default class MakePost extends Component {
 
                     <div
                       style={{
-                        display: 'inline-block',
-                        padding: '12px 12px 0px 12px',
+                        display: "inline-block",
+                        padding: "12px 12px 0px 12px",
                       }}
                     >
                       {post.text}
                     </div>
 
-                    <div style={{ objectFit: 'contain' }}></div>
+                    <div style={{ objectFit: "contain" }}></div>
 
-                    <div style={{ padding: '12px 12px 0px 12px' }}>
+                    <div style={{ padding: "12px 12px 0px 12px" }}>
                       <img
                         src="https://static-exp1.licdn.com/sc/h/d310t2g24pvdy4pt1jkedo4yb"
                         alt="LIKE"
@@ -310,7 +309,7 @@ export default class MakePost extends Component {
                       <span className="text-muted"> 0 · 0 comments </span>
                     </div>
 
-                    <div style={{ padding: '0px 12px 0px 12px' }}>
+                    <div style={{ padding: "0px 12px 0px 12px" }}>
                       <hr></hr>
                     </div>
 

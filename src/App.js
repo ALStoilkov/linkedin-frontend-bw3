@@ -1,5 +1,5 @@
 import React from "react";
-// import { withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
@@ -19,7 +19,8 @@ class App extends React.Component {
   };
 
   componentDidMount = async () => {
-    const getUser = await fetchUser("/");
+    const getUser = await fetchUser("/60c9e0c35ee05a04b09ad152");
+    console.log(getUser);
     this.setState({ user: getUser });
   };
 

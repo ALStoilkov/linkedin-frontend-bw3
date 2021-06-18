@@ -13,7 +13,7 @@ class UserCard extends Component {
         <ListGroup.Item className="d-flex  ">
           <img
             className="my-1 userImg"
-            src={this.props.user.image}
+            src={this.props.user?.image}
             width=" 40px"
             height="40px"
             alt="Profile picture"

@@ -1,10 +1,10 @@
 export const getPosts = async () => {
   const headers = {
-    Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
+    token: process.env.REACT_APP_TOKEN,
   };
   try {
     const response = await fetch(
-      "https://striveschool-api.herokuapp.com/api/posts/",
+      `${process.env.REACT_APP_BACKEND_LOCAL}/api/posts`,
       {
         headers,
       }

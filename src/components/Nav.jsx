@@ -119,12 +119,16 @@ export default class Nav extends Component {
             <button className="  dropdown">
               <div className="mebtn">
                 <div className="usericon">
-                  <img src={this.props.user.image} width="22px" alt="profile" />
+                  <img
+                    src={this.props.user?.image}
+                    width="22px"
+                    alt="profile"
+                  />
                   <p>Me ▼</p>
                 </div>
                 <div class="dropdown-content text-left">
                   <img
-                    src={this.props.user.image}
+                    src={this.props.user?.image}
                     className="dropdownUserimage"
                     width="50px"
                     alt="profile"

@@ -1,15 +1,13 @@
-const fetchUser = async (pathname) => {
+const fetchUser = async (userId) => {
   const headers = {
-    Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
+    token: process.env.REACT_APP_TOKEN,
   };
 
-  console.log("MY PATH IN GET", pathname);
+  console.log("MY USERID IN GET", userId);
 
   try {
     const response = await fetch(
-      pathname === "/"
-        ? "https://striveschool-api.herokuapp.com/api/profile/me"
-        : "https://striveschool-api.herokuapp.com/api/profile/" + pathname,
+      `${process.env.REACT_APP_BACKEND_CLOUD}/api/profile` + userId,
       {
         headers,
       }
