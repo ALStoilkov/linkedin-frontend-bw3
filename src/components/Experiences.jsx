@@ -10,15 +10,18 @@ class Experiences extends Component {
     isModalVis: false,
     count: 0,
     // myPath: this.props.location.pathname,
+    experiences: this.props.user.experiences,
   };
+
+  componentDidMount = async () => {};
 
   componentDidUpdate = async (prevProps) => {
     console.log("My user ID in update:", this.props.userID);
-    if (prevProps.userID !== this.props.userID) {
-      const listOfExp = await getExp(this.props.userID);
-      this.setState({ myExp: listOfExp });
-      console.log("myexp", this.state.myExp);
-    }
+    // if (prevProps.userID !== this.props.userID) {
+    //   const listOfExp = await getExp(this.props.userID);
+    //   this.setState({ myExp: listOfExp });
+    //   console.log("myexp", this.state.myExp);
+    // }
   };
 
   handleDelete = async (e) => {
@@ -54,11 +57,11 @@ class Experiences extends Component {
           </Col>
           <Col className="col-2">
             {/* {this.state.myPath === "/me" && <ExperienceModal />} */}
-            <ExperienceModal />
+            <ExperienceModal addExp={() => this.props.addExp()} />
           </Col>
         </Row>
         <br />
-        {this.state.myExp?.map((experience) => (
+        {this.state.experiences.map((experience) => (
           <Row>
             <Col md={1}></Col>
             <Col md={8}>
@@ -75,35 +78,34 @@ class Experiences extends Component {
                 <hr />
               </div>
             </Col>
-            {this.props.user._id === experience.user && (
-              <Col md={2}>
-                <Button
+
+            <Col md={2}>
+              <Button
+                value={experience._id}
+                style={{
+                  background: "none",
+                }}
+                type="button"
+                title="Remove Experience"
+                variant="white"
+                onClick={() => this.handleDelete(experience._id)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                   value={experience._id}
-                  style={{
-                    background: "none",
-                  }}
-                  type="button"
-                  title="Remove Experience"
-                  variant="white"
-                  onClick={() => this.handleDelete(experience._id)}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    value={experience._id}
-                  >
-                    <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
-                  </svg>
-                </Button>
-              </Col>
-            )}
+                  <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
+                </svg>
+              </Button>
+            </Col>
           </Row>
         ))}
       </Card>

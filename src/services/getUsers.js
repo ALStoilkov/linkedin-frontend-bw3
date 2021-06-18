@@ -1,11 +1,11 @@
 const getUsers = async () => {
   const headers = {
-    Authorization: "Bearer " + process.env.REACT_APP_TOKEN,
+    token: process.env.REACT_APP_TOKEN,
   };
 
   try {
     const response = await fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/",
+      `${process.env.REACT_APP_BACKEND_CLOUD}/api/profile/`,
       {
         headers,
       }
