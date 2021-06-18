@@ -33,7 +33,7 @@ export default class MakePost extends Component {
 
   renderPosts = async () => {
     const posts = await getPosts();
-    console.log("MY POST", posts[0]);
+    // console.log("MY POST", posts[0]);
     this.setState({ posts });
     console.log("my postsssss", this.state.posts);
     this.setState({ isSubmitClicked: false });
@@ -254,7 +254,7 @@ export default class MakePost extends Component {
               </Card.Body>
             </Card>
             <br />
-            {this.state.posts.length > 0 &&
+            {this.state.posts?.length > 0 &&
               this.state.posts.map((post) => (
                 <Card key={post._id} className="my-2 postCard">
                   <Col xs={12} className="p-0 mb-4 section-outer">
