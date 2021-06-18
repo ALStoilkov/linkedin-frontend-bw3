@@ -41,7 +41,7 @@ export default class MakePost extends Component {
     };
     try {
       const response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/posts/" + e.target.value,
+        "https://linkedinbackend.herokuapp.com/api/posts/" + e.target.value,
         {
           method: "DELETE",
           headers,
