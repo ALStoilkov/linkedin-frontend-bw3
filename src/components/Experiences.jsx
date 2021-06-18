@@ -58,7 +58,7 @@ class Experiences extends Component {
           </Col>
         </Row>
         <br />
-        {this.state.myExp.map((experience) => (
+        {this.state.myExp?.map((experience) => (
           <Row>
             <Col md={1}></Col>
             <Col md={8}>

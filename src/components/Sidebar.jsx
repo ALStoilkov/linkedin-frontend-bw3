@@ -15,8 +15,7 @@ class Sidebar extends Component {
       <div className="">
         <Card id="CardSidebar" style={{}}>
           <Card.Header className="mr-auto">People you may know</Card.Header>
-          {this.props.listOfUsers
-            .slice(this.randomnumber, this.randomnumber + 5)
+          {this.props.listOfUsers?.slice(this.randomnumber, this.randomnumber + 5)
             .map((user) => (
               <UserCard user={user} key={user._id} />
             ))}
