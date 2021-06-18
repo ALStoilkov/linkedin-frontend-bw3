@@ -92,7 +92,7 @@ export default class MakePost extends Component {
           <Col className="col-9">
             <Post />
             {this.state.posts &&
-              this.state.posts.map((post) => (
+              this.state.posts.reverse().map((post) => (
                 <Card key={post._id} className="my-2 postCard">
                   <Col xs={12} className="p-0 mb-4 section-outer">
                     <div

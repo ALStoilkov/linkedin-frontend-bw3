@@ -14,12 +14,12 @@ class MyProfile extends Component {
   };
 
   addExp = async () => {
-    await fetchUser("/60c9e0c35ee05a04b09ad152");
+    await fetchUser(`${this.props.user._id}`);
     this.setState({ addExp: !this.state.addExp });
   };
 
   componentDidMount = async () => {
-    const getUser = await fetchUser("/60c9e0c35ee05a04b09ad152");
+    const getUser = await fetchUser(`${this.props.user._id}`);
     this.setState({ user: getUser });
     const getListOfUsers = await getUsers();
     this.setState({ listOfUsers: getListOfUsers });
